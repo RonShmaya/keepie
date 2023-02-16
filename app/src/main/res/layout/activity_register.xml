@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.Register_activity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f9e17f"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/lottie_lock"
+            app:lottie_speed="0.8" />
+        <!--    <LinearLayout-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:orientation="vertical"-->
+        <!--        android:layout_gravity="start"-->
+        <!--        android:layout_marginBottom="20dp"-->
+        <!--        android:background="@drawable/rounded"-->
+        <!--        android:backgroundTint="#F9EAAA">-->
+        <!--            <com.google.android.material.textview.MaterialTextView-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:textSize="20sp"-->
+        <!--                android:textColor="@color/black"-->
+        <!--                android:padding="20dp"-->
+        <!--                android:text="add your listener:"-->
+        <!--                android:fontFamily="@font/comfortaa_bold"/>-->
+        <!--    </LinearLayout>-->
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:gravity="center"-->
+        <!--                android:orientation="vertical"-->
+        <!--                android:background="@drawable/rounded"-->
+        <!--                android:backgroundTint="#F9EAAA">-->
+
+        <!--            <com.google.android.material.textview.MaterialTextView-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:textSize="20sp"-->
+        <!--                android:textColor="@color/black"-->
+        <!--                android:padding="20dp"-->
+        <!--                android:text="password:   *********"-->
+        <!--                android:fontFamily="@font/comfortaa_bold"/>-->
+
+        <!--            </LinearLayout>-->
+
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:gravity="center"-->
+        <!--                android:layout_marginBottom="20dp"-->
+        <!--                android:layout_marginTop="20dp"-->
+        <!--                android:orientation="vertical"-->
+        <!--                android:background="@drawable/rounded"-->
+        <!--                android:backgroundTint="#F9EAAA">-->
+
+        <!--                <com.google.android.material.textview.MaterialTextView-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:textSize="20sp"-->
+        <!--                    android:textColor="@color/black"-->
+        <!--                    android:padding="20dp"-->
+        <!--                    android:text="listener phone: 05412121212"-->
+        <!--                    android:fontFamily="@font/comfortaa_bold"/>-->
+
+        <!--            </LinearLayout>-->
+        <!--            <com.google.android.material.button.MaterialButton-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_margin="15dp"-->
+        <!--                android:background="@drawable/rounded"-->
+        <!--                android:textSize="30sp"-->
+        <!--                android:fontFamily="@font/comfortaa_bold"-->
+        <!--                android:text="submit"-->
+        <!--                android:backgroundTint="#6B6060"/>-->
+
+        <!--        3A3636-->
+        <!--        F9EAAA-->
+        <!--        #6B6060-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/rounded"
+            android:backgroundTint="#F9EAAA"
+            android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/comfortaa_bold"
+                android:padding="20dp"
+                android:text="new connection occurred:"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/rounded"
+            android:backgroundTint="#F9EAAA"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/comfortaa_bold"
+                android:padding="20dp"
+                android:text="name: Roee Man\nPhone: 0542343244"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:background="#27A2A1"
+                android:layout_marginEnd="5dp"
+                android:backgroundTint="#386969"
+                android:src="@android:drawable/ic_input_add"/>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:background="#004443"
+                android:backgroundTint="#B53131"
+                android:src="@android:drawable/ic_delete"/>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>
