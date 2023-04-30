@@ -3,12 +3,15 @@ package com.ron.keepie.activities;
 import android.animation.Animator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.ron.keepie.R;
+import com.ron.keepie.activities.adult.FollowActivity;
+import com.ron.keepie.activities.adult.NotificationsActivity;
 import com.ron.keepie.callbacks.Callback_find_account;
 import com.ron.keepie.mytools.DataManager;
 import com.ron.keepie.objects.MyUser;
@@ -57,13 +60,16 @@ public class Enter_app_activity extends AppCompatActivity {
     }
 
     public void verifyUser() {
-        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-            go_next(Login_activity.class); // no user connected
-        } else {
-            // MyDB.getInstance().isAccountExists(userType , FirebaseAuth.getInstance().getCurrentUser().getUid());
-            //TODO: change it
-            go_next(ListenChatsActivity.class);
-        }
+        //go_next(Register_activity.class);
+        go_next(FollowActivity.class);
+        //go_next(SettingActivity.class);
+//        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+//            go_next(Login_activity.class); // no user connected
+//        } else {
+//            // MyDB.getInstance().isAccountExists(userType , FirebaseAuth.getInstance().getCurrentUser().getUid());
+//            //TODO: verify if account exists or not + which account it is by callback
+//            //go_next(ListenChatsActivity.class);
+//        }
     }
 
     private <T extends AppCompatActivity> void go_next(Class<T> nextActivity) {
@@ -87,13 +93,15 @@ public class Enter_app_activity extends AppCompatActivity {
         @Override
         public void account_not_found() {
             FirebaseAuth.getInstance().signOut();
-            //go_next(Register_Activity.class); nooo
+            Toast.makeText(Enter_app_activity.this, "Account didn't founded...", Toast.LENGTH_SHORT).show();
+            go_next(Login_activity.class);
         }
 
         @Override
         public void error() {
             FirebaseAuth.getInstance().signOut();
-            //go_next(Activity_Login.class);
+            Toast.makeText(Enter_app_activity.this, "Some Error occurred during searching account...", Toast.LENGTH_SHORT).show();
+            go_next(Login_activity.class);
         }
     };
 

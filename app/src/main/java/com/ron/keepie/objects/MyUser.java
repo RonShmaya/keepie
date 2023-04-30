@@ -8,10 +8,13 @@ import java.util.HashMap;
 public class MyUser {
 
 
-    private String id;
+
     private DataManager.eUserType userType;
-    private ArrayList<String> myListeners = new ArrayList<>();
-    private ArrayList<String> myObservables = new ArrayList<>();
+    private String id= "";
+    private String nick_name = "";
+    private String phone = "";
+    private String img_uri = "";
+
 
     public MyUser() {
     }
@@ -33,21 +36,30 @@ public class MyUser {
         return this;
     }
 
-    public ArrayList<String> getMyListeners() {
-        return myListeners;
+    public String getNick_name() {
+        return nick_name;
     }
 
-    public MyUser setMyListeners(ArrayList<String> myListeners) {
-        this.myListeners = myListeners;
+    public MyUser setNick_name(String nick_name) {
+        this.nick_name = nick_name;
         return this;
     }
 
-    public ArrayList<String> getMyObservables() {
-        return myObservables;
+    public String getPhone() {
+        return phone;
     }
 
-    public MyUser setMyObservables(ArrayList<String> myObservables) {
-        this.myObservables = myObservables;
+    public MyUser setPhone(String phone) {
+        this.phone = phone;
+        return this;
+    }
+
+    public String getImg_uri() {
+        return img_uri;
+    }
+
+    public MyUser setImg_uri(String img_uri) {
+        this.img_uri = img_uri;
         return this;
     }
 }
