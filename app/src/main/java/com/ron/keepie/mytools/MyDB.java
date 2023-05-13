@@ -8,19 +8,24 @@ import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.ron.keepie.callbacks.Callback_find_account;
 import com.ron.keepie.callbacks.Callback_message;
-import com.ron.keepie.objects.Message;
+import com.ron.keepie.callbacks.Callback_user_status;
+import com.ron.keepie.whatsup_objects.Message;
+import com.ron.keepie.whatsup_objects.UserStatus;
 
 import java.util.HashMap;
 
 public class MyDB {
     public static final String ACCOUNTS_KEEPIE = "ACCOUNTS_KEEPIE";
     public static final String CHATS = "CHATS";
+    public static final String USER_STATUS = "USER_STATUS";
 
     private static MyDB _instance = new MyDB();
     private FirebaseDatabase database;
+    private DatabaseReference refUserStatus;
     private DatabaseReference refAccounts;
     private DatabaseReference refChats;
     private Callback_find_account callback_find_user;
+    private Callback_user_status callback_user_status;
    // private Callback_creating_account callback_account_creating;
     private Callback_message callback_get_messages;
     //private CallBack_get_all_chats callBack_get_all_chats;
@@ -29,6 +34,7 @@ public class MyDB {
         database = FirebaseDatabase.getInstance("https://keepie-cb5ec-default-rtdb.europe-west1.firebasedatabase.app");
         refAccounts = database.getReference(ACCOUNTS_KEEPIE);
         refChats = database.getReference(CHATS);
+        refUserStatus = database.getReference(USER_STATUS);
     }
 
     public static MyDB getInstance() {
@@ -40,8 +46,11 @@ public class MyDB {
         return this;
     }
 
-
-//    public MyDB setCallback_account_creating(Callback_creating_account callback_account_creating) {
+    public MyDB setCallback_user_status(Callback_user_status callback_user_status) {
+        this.callback_user_status = callback_user_status;
+        return this;
+    }
+    //    public MyDB setCallback_account_creating(Callback_creating_account callback_account_creating) {
 //        this.callback_account_creating = callback_account_creating;
 //        return this;
 //    }
@@ -70,7 +79,25 @@ public class MyDB {
             });
         }
     }
+    public void get_user_status(String phone) {
+        if (this.callback_user_status != null) {
+            refUserStatus.child(phone).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    UserStatus userStatus = dataSnapshot.getValue(UserStatus.class);
+                    if(userStatus == null){
+                        callback_user_status.not_found();
+                    }
+                    callback_user_status.get_user_status(userStatus);
+                }
 
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    callback_user_status.error();
+                }
+            });
+        }
+    }
 
 //    public void isAccountExists(String phoneID) {
 //        if (this.callback_find_user != null) {

@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".activities.Register_activity">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_back"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
+        app:borderWidth="0dp"
+
+        />
 
     <LinearLayout
         android:layout_width="match_parent"

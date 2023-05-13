@@ -4,14 +4,13 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.textview.MaterialTextView;
 import com.ron.keepie.R;
-import com.ron.keepie.objects.MyUser;
+import com.ron.keepie.objects.KeepieUser;
 
 import java.util.ArrayList;
 
@@ -21,16 +20,16 @@ public class FollowersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 
     public interface ClickedUser {
-        void clicked(MyUser contact, int position);
-        void delete(MyUser contact, int position);
+        void clicked(KeepieUser contact, int position);
+        void delete(KeepieUser contact, int position);
     }
 
     private Activity activity;
     private ClickedUser userListener;
 
-    private ArrayList<MyUser> myUsers = new ArrayList<>();
+    private ArrayList<KeepieUser> myUsers = new ArrayList<>();
 
-    public FollowersAdapter(Activity activity, ArrayList<MyUser> myUsers) {
+    public FollowersAdapter(Activity activity, ArrayList<KeepieUser> myUsers) {
         this.activity = activity;
         this.myUsers = myUsers;
     }
@@ -50,12 +49,12 @@ public class FollowersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         final UserHolder holder = (UserHolder) viewHolder;
-        MyUser myUser = getItem(position);
+        KeepieUser myUser = getItem(position);
 
 
-        holder.listFollowers_LBL_user_name.setText(myUser.getNick_name());
+        holder.listFollowers_LBL_user_name.setText(myUser.getName());
         holder.listFollowers_LBL_phone.setText(myUser.getPhone());
-        Glide.with(activity).load(myUser.getImg_uri()).placeholder(R.drawable.ic_user).into(holder.listFollowers_IMG_photo);
+        Glide.with(activity).load(myUser.getImage()).placeholder(R.drawable.ic_user).into(holder.listFollowers_IMG_photo);
 
     }
 
@@ -64,7 +63,7 @@ public class FollowersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return myUsers.size();
     }
 
-    public MyUser getItem(int position) {
+    public KeepieUser getItem(int position) {
         return myUsers.get(position);
     }
 

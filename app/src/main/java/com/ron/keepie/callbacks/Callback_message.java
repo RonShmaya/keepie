@@ -1,7 +1,6 @@
 package com.ron.keepie.callbacks;
 
-import com.ron.keepie.objects.ChatDB;
-import com.ron.keepie.objects.Message;
+import com.ron.keepie.whatsup_objects.Message;
 
 import java.util.HashMap;
 

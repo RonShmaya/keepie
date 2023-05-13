@@ -1,16 +1,16 @@
 package com.ron.keepie.activities;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
@@ -34,7 +34,6 @@ import com.ron.keepie.mytools.MyStorage;
 import com.ron.keepie.objects.KeepieUser;
 import com.ron.keepie.server.UserServerCommunicator;
 import com.ron.keepie.server.server_callbacks.SetUserCallback;
-import com.ron.keepie.whatsup_objects.UserChat;
 import com.ron.keepie.whatsup_objects.UserStatus;
 
 import org.jetbrains.annotations.NotNull;
@@ -44,9 +43,7 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-// TODO: 13/05/2023 in DB raise user already exists 
-// TODO: 13/05/2023 change image dialog colors
-public class SettingActivity extends AppCompatActivity {
+public class NewUserSettingActivity extends AppCompatActivity {
     private CoordinatorLayout container;
     private MaterialButton profile_BTN_save;
     private BottomNavigationView nav_view;
@@ -55,12 +52,11 @@ public class SettingActivity extends AppCompatActivity {
     private MaterialTextView profile_LBL_phone;
     private LottieAnimationView profile_Lottie_photo;
     private FloatingActionButton fab_back;
-
-    private String phone;
-    private String setting_type;
     private KeepieUser myUser = null;
-
-
+    private UserStatus userStatus = null;
+    private String phone = "";
+    private String setting_type = "";
+    private String imageUri = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,33 +65,23 @@ public class SettingActivity extends AppCompatActivity {
         UserServerCommunicator.getInstance().setSetUserCallback(setUserCallback);
         MyDB.getInstance().setCallback_user_status(callback_user_status);
         MyStorage.getInstance().setCallback_upload_profile_img(callback_upload_img);
+        setting_type = getIntent().getStringExtra(DataManager.SETTING_TYPE);
         findViews();
         init_page();
     }
 
-
     private void init_page() {
-        myUser = DataManager.getDataManager().getMy_current_user();
-        if (myUser == null) {
-            Toast.makeText(this, "Some Error Occurred...", Toast.LENGTH_SHORT).show();
-            profile_BTN_save.setVisibility(View.GONE);
-            return;
+        nav_view.setVisibility(View.GONE);
+        phone = FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
+        if (phone == null) {
+            Toast.makeText(this, "Authentication error...", Toast.LENGTH_SHORT).show();
+            go_next(Enter_app_activity.class);
         }
-        if (myUser.getImage() == null || myUser.getImage().isEmpty())
-            MyDB.getInstance().get_user_status(myUser.getPhone());
-        else
-            Glide.with(SettingActivity.this).load(myUser.getImage()).placeholder(R.drawable.ic_user).into(profile_IMG_photo);
-
-        profile_EDT_name.setText(myUser.getName());
-        profile_LBL_phone.setText(myUser.getPhone());
-        fab_back.setVisibility(View.GONE);
-        if (myUser.isIs_child()) {
-            nav_view.setVisibility(View.GONE);
-            // TODO: 13/05/2023 add child steps
-        } else {
-            init_toolbar();
-        }
+        MyDB.getInstance().get_user_status(phone);
+        profile_LBL_phone.setText(phone);
+        profile_EDT_name.setText(phone);
     }
+
 
     private void findViews() {
         container = findViewById(R.id.container);
@@ -107,27 +93,14 @@ public class SettingActivity extends AppCompatActivity {
         profile_EDT_name = findViewById(R.id.profile_EDT_name);
         profile_Lottie_photo = findViewById(R.id.profile_Lottie_photo);
 
-        profile_IMG_photo.setOnClickListener(view -> new ImageDialog().show(this, myUser.getPhone(), myUser.getImage()));
+        profile_IMG_photo.setOnClickListener(view -> {
+            new ImageDialog().show(this, phone, imageUri);
+        });
         profile_Lottie_photo.setOnClickListener(view -> add_photo());
         fab_back.setOnClickListener(view -> go_next(Register_activity.class));
         profile_BTN_save.setOnClickListener(onClickListenerSave);
     }
 
-    private void init_toolbar() {
-        nav_view.setOnItemSelectedListener(item -> {
-            if (item.getItemId() == R.id.action_followers) {
-                go_next(FollowActivity.class);
-            } else if (item.getItemId() == R.id.action_profile) {
-                go_next(SettingActivity.class);
-            } else if (item.getItemId() == R.id.action_notify) {
-                go_next(NotificationsActivity.class);
-            } else if (item.getItemId() == R.id.action_test) {
-                // go_next(Activity_private_account_profile.class);
-            }
-            return false;
-        });
-
-    }
 
     private <T extends AppCompatActivity> void go_next(Class<T> nextActivity) {
         Intent intent = new Intent(this, nextActivity);
@@ -139,11 +112,15 @@ public class SettingActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             if (profile_EDT_name.getText() == null || profile_EDT_name.getText().toString().isEmpty()) {
-                Toast.makeText(SettingActivity.this, "Name cannot be empty...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NewUserSettingActivity.this, "Name cannot be empty...", Toast.LENGTH_SHORT).show();
                 return;
             }
-            myUser.setName(profile_EDT_name.getText().toString());
-            UserServerCommunicator.getInstance().updateUser(myUser);
+            myUser = new KeepieUser(setting_type.equals(DataManager.SETTING_TYPE_CHILD),
+                    profile_EDT_name.getText().toString(),
+                    profile_LBL_phone.getText().toString(),
+                    imageUri);
+            UserServerCommunicator.getInstance().createUser(myUser);
+
         }
     };
 
@@ -151,30 +128,36 @@ public class SettingActivity extends AppCompatActivity {
         @Override
         public void user_merged() {
             DataManager.getDataManager().set_account(myUser);
-            Toast.makeText(SettingActivity.this, "Done!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(NewUserSettingActivity.this, "Done!", Toast.LENGTH_SHORT).show();
+
+            if (myUser.isIs_child()) {
+                // TODO: 13/05/2023  go next
+            } else {
+                go_next(FollowActivity.class);
+            }
+
+
         }
 
         @Override
         public void failed(int status_code, String info) {
-            Toast.makeText(SettingActivity.this, "Some Error occurred during searching account " + status_code + " " + info, Toast.LENGTH_SHORT).show();
+            Toast.makeText(NewUserSettingActivity.this, "" + status_code + " " + info, Toast.LENGTH_LONG).show();
         }
     };
     private Callback_user_status callback_user_status = new Callback_user_status() {
         @Override
         public void get_user_status(UserStatus userStatus) {
-            if (!userStatus.getImg().isEmpty()) {
-                myUser.setImage(userStatus.getImg());
-                UserServerCommunicator.getInstance().updateUser(myUser);
-                DataManager.getDataManager().set_account(myUser);
-            }
-            Glide.with(SettingActivity.this).load(myUser.getImage()).placeholder(R.drawable.ic_user).into(profile_IMG_photo);
+            imageUri = userStatus.getImg();
+            NewUserSettingActivity.this.userStatus = userStatus;
 
+            if (!userStatus.getImg().isEmpty())
+                Glide.with(NewUserSettingActivity.this).load(userStatus.getImg()).placeholder(R.drawable.ic_user).into(profile_IMG_photo);
         }
 
         @Override
         public void not_found() {
-            if (myUser.isIs_child()) {
-                Toast.makeText(SettingActivity.this, "Child account must have a WhatsUp account... please create one", Toast.LENGTH_SHORT).show();
+            if (setting_type.equals(DataManager.SETTING_TYPE_CHILD)) {
+                Toast.makeText(NewUserSettingActivity.this, "Child account must have a WhatsUp account... please create one", Toast.LENGTH_SHORT).show();
                 profile_BTN_save.setText("Go Back");
                 profile_BTN_save.setOnClickListener(view -> go_next(Enter_app_activity.class));
             }
@@ -182,7 +165,7 @@ public class SettingActivity extends AppCompatActivity {
 
         @Override
         public void error() {
-            Toast.makeText(SettingActivity.this, "Some Error occurred please check your internet...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(NewUserSettingActivity.this, "Some Error occurred please check your internet...", Toast.LENGTH_SHORT).show();
 
         }
     };
@@ -210,7 +193,8 @@ public class SettingActivity extends AppCompatActivity {
         if (result.getResultCode() == RESULT_OK) {
             Uri uri = result.getData().getData();
             profile_IMG_photo.setImageURI(uri);
-            MyStorage.getInstance().uploadImageProfile(myUser.getPhone(), uri);
+            imageUri = uri.toString();
+            MyStorage.getInstance().uploadImageProfile(phone, uri);
 
         } else if (result.getResultCode() == ImagePicker.RESULT_ERROR) {
             Toast.makeText(this, "image upload failed please, try again", Toast.LENGTH_SHORT).show();
@@ -219,14 +203,15 @@ public class SettingActivity extends AppCompatActivity {
     private Callback_upload_img callback_upload_img = new Callback_upload_img() {
         @Override
         public void img_uploaded(String image_uri) {
+
             if (image_uri != null && !image_uri.isEmpty()) {
-                myUser.setImage(image_uri);
+                NewUserSettingActivity.this.imageUri = image_uri;
             }
         }
 
         @Override
         public void failed() {
-            Toast.makeText(SettingActivity.this, "Image upload failed, please try again", Toast.LENGTH_SHORT).show();
+            Toast.makeText(NewUserSettingActivity.this, "Image upload failed, please try again", Toast.LENGTH_SHORT).show();
         }
     };
 

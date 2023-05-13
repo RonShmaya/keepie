@@ -13,6 +13,11 @@ import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.ron.keepie.R;
+import com.ron.keepie.activities.adult.FollowActivity;
+import com.ron.keepie.mytools.DataManager;
+import com.ron.keepie.objects.KeepieUser;
+import com.ron.keepie.server.UserServerCommunicator;
+import com.ron.keepie.server.server_callbacks.GetUserCallback;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,40 +25,46 @@ import java.util.List;
 public class Login_activity extends AppCompatActivity {
     private MaterialButton connect_BTN_login;
     private MaterialButton connect_BTN_register;
+    private boolean is_register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        UserServerCommunicator.getInstance().setGetUserCallback(userCallback);
         findViews();
     }
 
     private void findViews() {
         connect_BTN_login = findViewById(R.id.connect_BTN_login);
         connect_BTN_register = findViewById(R.id.connect_BTN_register);
-        connect_BTN_login.setOnClickListener(onClickListener);
-        connect_BTN_register.setOnClickListener(onClickListener);
+        connect_BTN_login.setOnClickListener(onClickListenerLog);
+        connect_BTN_register.setOnClickListener(onClickListenerReg);
     }
 
-    private View.OnClickListener onClickListener = view -> make_FirebaseAuth();
+    private View.OnClickListener onClickListenerReg = view -> {
+        is_register = true;
+        make_FirebaseAuth();
+    };
+    private View.OnClickListener onClickListenerLog = view -> {
+        is_register = false;
+        make_FirebaseAuth();
+    };
 
     private final ActivityResultLauncher<Intent> signInLauncher = registerForActivityResult(
             new FirebaseAuthUIActivityResultContract(),
             result -> connect_to_user()
-    ); // TODO: 04/02/2023 Verify user really entered 
+    );
 
     private void connect_to_user() {
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             return;
         }
-        go_next(ListenChatsActivity.class);
-        // go_next(Register_activity.class);
-//        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-//            Toast.makeText(this, "OK", Toast.LENGTH_SHORT).show();
-//            go_next(Register_activity.class);
-//        } else {
-//            Toast.makeText(this, "NOT OK", Toast.LENGTH_SHORT).show();
-//        }
+        if (is_register){
+            go_next(Register_activity.class);
+            return;
+        }
+        UserServerCommunicator.getInstance().getUserDetails(FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber());
     }
 
     private <T extends AppCompatActivity> void go_next(Class<T> nextActivity) {
@@ -73,4 +84,31 @@ public class Login_activity extends AppCompatActivity {
                 .build();
         signInLauncher.launch(signInIntent);
     }
+    private GetUserCallback userCallback = new GetUserCallback() {
+
+        @Override
+        public void get_user(KeepieUser user) {
+
+            DataManager.getDataManager().set_account(user);
+            if(user.isIs_child()){
+                //go_next(NotificationsActivity.class);
+                // TODO: 13/05/2023 add child main page
+            }
+            else{
+                go_next(FollowActivity.class);
+            }
+
+        }
+
+        @Override
+        public void not_found_user() {
+            Toast.makeText(Login_activity.this, "User didn't founded", Toast.LENGTH_SHORT).show();
+
+        }
+
+        @Override
+        public void failed(int status_code, String info) {
+            Toast.makeText(Login_activity.this, "Some Error occurred during searching account "+status_code + " "+ info, Toast.LENGTH_SHORT).show();
+        }
+    };
 }

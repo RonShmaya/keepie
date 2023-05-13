@@ -1,20 +1,17 @@
-package com.ron.keepie.objects;
+package com.ron.keepie.whatsup_objects;
 
-import com.ron.keepie.mytools.DataManager;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MyUser {
 
 
-
-    private DataManager.eUserType userType;
     private String id= "";
     private String nick_name = "";
     private String phone = "";
     private String img_uri = "";
-
+    private String lang= "";
+    private UserChat userChat= new UserChat();
+    private HashMap<String,ChatDB> chats = new HashMap<>();
 
     public MyUser() {
     }
@@ -23,16 +20,17 @@ public class MyUser {
         return id;
     }
 
-    public void setId(String id) {
+    public MyUser setId(String id) {
         this.id = id;
+        return this;
     }
 
-    public DataManager.eUserType getUserType() {
-        return userType;
+    public String getLang() {
+        return lang;
     }
 
-    public MyUser setUserType(DataManager.eUserType userType) {
-        this.userType = userType;
+    public MyUser setLang(String lang) {
+        this.lang = lang;
         return this;
     }
 
@@ -49,8 +47,26 @@ public class MyUser {
         return phone;
     }
 
+    public HashMap<String, ChatDB> getChats() {
+        return chats;
+    }
+
+    public MyUser setChats(HashMap<String, ChatDB> chats) {
+        this.chats = chats;
+        return this;
+    }
+
     public MyUser setPhone(String phone) {
         this.phone = phone;
+        return this;
+    }
+
+    public UserChat getUserChat() {
+        return userChat;
+    }
+
+    public MyUser setUserChat(UserChat userChat) {
+        this.userChat = userChat;
         return this;
     }
 

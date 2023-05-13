@@ -6,21 +6,46 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ron.keepie.R;
+import com.ron.keepie.mytools.DataManager;
 
 public class Register_activity extends AppCompatActivity {
+    private MaterialButton connect_BTN_reg_adult;
+    private MaterialButton connect_BTN_reg_adolescent;
+    private FloatingActionButton fab_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        Intent intent = new Intent(this, WhatsAppService.class);
-        intent.setAction(WhatsAppService.START_FOREGROUND_SERVICE);
+        findViews();
+        init_actions();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(intent);
-        } else {
-            startService(intent);
-        }
+
+    }
+
+    private void init_actions() {
+        connect_BTN_reg_adult.setOnClickListener(view -> go_to_settings(DataManager.SETTING_TYPE_ADULT));
+        connect_BTN_reg_adolescent.setOnClickListener(view -> go_to_settings(DataManager.SETTING_TYPE_CHILD));
+        fab_back.setOnClickListener(view -> go_next(Login_activity.class));
+    }
+
+    private void findViews() {
+        connect_BTN_reg_adult = findViewById(R.id.connect_BTN_reg_adult);
+        connect_BTN_reg_adolescent = findViewById(R.id.connect_BTN_reg_adolescent);
+        fab_back = findViewById(R.id.fab_back);
+    }
+    private  void go_to_settings(String type) {
+        Intent intent = new Intent(this, NewUserSettingActivity.class);
+        intent.putExtra(DataManager.SETTING_TYPE,type);
+        startActivity(intent);
+        finish();
+    }
+    private <T extends AppCompatActivity> void go_next(Class<T> nextActivity) {
+        Intent intent = new Intent(this, nextActivity);
+        startActivity(intent);
+        finish();
     }
 }

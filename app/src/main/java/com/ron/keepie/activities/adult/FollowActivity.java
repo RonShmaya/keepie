@@ -1,21 +1,17 @@
 package com.ron.keepie.activities.adult;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.widget.LinearLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationBarView;
 import com.ron.keepie.R;
 import com.ron.keepie.activities.SettingActivity;
 import com.ron.keepie.adapters.FollowersAdapter;
-import com.ron.keepie.objects.MyUser;
+import com.ron.keepie.objects.KeepieUser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +19,7 @@ import java.util.Arrays;
 public class FollowActivity extends AppCompatActivity {
     private BottomNavigationView nav_view;
     private FollowersAdapter followersAdapter;
-    private ArrayList<MyUser> myFollows = new ArrayList<>();
+    private ArrayList<KeepieUser> myFollows = new ArrayList<>();
     private RecyclerView follow_LST;
     private LinearLayout follow_LAY_empty;
 
@@ -34,12 +30,12 @@ public class FollowActivity extends AppCompatActivity {
         init_toolbar();
         findViews();
         myFollows = new ArrayList<>(Arrays.asList(
-           new MyUser().setNick_name("dsa").setPhone("0434320423") ,
-           new MyUser().setNick_name("dsa").setPhone("0434320423") ,
-           new MyUser().setNick_name("ddwewedsa").setPhone("0434320423") ,
-           new MyUser().setNick_name("ddsfdssa").setPhone("0434320423") ,
-           new MyUser().setNick_name("dsads").setPhone("0434320423") ,
-           new MyUser().setNick_name("dsfdsa").setPhone("0434320423")
+           new KeepieUser().setName("dsa").setPhone("0434320423") ,
+           new KeepieUser().setName("dsa").setPhone("0434320423") ,
+           new KeepieUser().setName("ddwewedsa").setPhone("0434320423") ,
+           new KeepieUser().setName("ddsfdssa").setPhone("0434320423") ,
+           new KeepieUser().setName("dsads").setPhone("0434320423") ,
+           new KeepieUser().setName("dsfdsa").setPhone("0434320423")
         ));
         followersAdapter = new FollowersAdapter(this, myFollows);
         follow_LST.setAdapter(followersAdapter);

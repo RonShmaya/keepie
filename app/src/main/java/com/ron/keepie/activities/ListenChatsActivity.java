@@ -17,8 +17,8 @@ import com.ron.keepie.R;
 import com.ron.keepie.adapters.SpeackingAdapter;
 import com.ron.keepie.callbacks.Callback_message;
 import com.ron.keepie.mytools.MyDB;
-import com.ron.keepie.objects.Chat;
-import com.ron.keepie.objects.Message;
+import com.ron.keepie.whatsup_objects.Chat;
+import com.ron.keepie.whatsup_objects.Message;
 
 import java.util.ArrayList;
 import java.util.Comparator;

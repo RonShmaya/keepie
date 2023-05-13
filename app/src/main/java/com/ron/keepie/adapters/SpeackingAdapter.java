@@ -6,7 +6,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
 import com.ron.keepie.R;
-import com.ron.keepie.objects.Message;
+import com.ron.keepie.whatsup_objects.Message;
 
 import java.util.ArrayList;
 
