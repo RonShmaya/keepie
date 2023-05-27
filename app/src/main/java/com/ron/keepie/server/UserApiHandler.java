@@ -26,5 +26,11 @@ public interface UserApiHandler {
     @PUT("/user")
     Call<Void> updateUserDetails(@Body KeepieUser user);
 
+    @GET("/admin/data")
+    Call<Void> admin_data();
+
+    @GET("/admin/note")
+    Call<Void> admin_alert();
+
 
 }

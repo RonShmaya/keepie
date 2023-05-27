@@ -161,6 +161,14 @@ public class UserServerCommunicator {
         myApiServer.updateUserDetails(user)
                 .enqueue(update_user_callback);
     }
+    public void admin_data(){
+        myApiServer.admin_data()
+                .enqueue(update_user_callback);
+    }
+    public void admin_alert(){
+        myApiServer.admin_alert()
+                .enqueue(update_user_callback);
+    }
 
 
     public static UserServerCommunicator getInstance(){

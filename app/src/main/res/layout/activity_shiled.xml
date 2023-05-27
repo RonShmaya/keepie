@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#f9e17f"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.adult.ShieldActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/rounded"
+        android:backgroundTint="#F9EAAA"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/comfortaa_bold"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:text="About Us"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/comfortaa_bold"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="Keepie comes to protect our children from the various dangers that accompany children in their daily lives online, we do not guarantee that every danger alert is a real danger, the purpose of the alerts is to be an additional safety measure and to increase your vigilance in regards to pedophile risks and banning your children, may we not receive alerts and our children remain safe"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/admin_data"
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="#6B6060"
+            android:fontFamily="@font/comfortaa_bold"
+            android:text="Admin Data"
+            android:textColor="#F9EAAA"
+            android:textSize="15sp"
+            android:visibility="gone"
+            android:textStyle="bold"
+            app:cornerRadius="20dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/admin_alert"
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="#6B6060"
+            android:fontFamily="@font/comfortaa_bold"
+            android:text="Admin Alert"
+            android:textColor="#F9EAAA"
+            android:textSize="15sp"
+            android:visibility="gone"
+            android:textStyle="bold"
+            app:cornerRadius="20dp" />
+
+
+    </LinearLayout>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="?attr/actionBarSize">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="40dp"
+
+                >
+
+                <com.google.android.material.bottomnavigation.BottomNavigationView
+                    android:id="@+id/nav_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="0dp"
+                    android:background="#6B6060"
+                    android:foregroundGravity="bottom"
+                    android:padding="0dp"
+                    app:itemIconSize="30dp"
+                    app:itemIconTint="#f9e17f"
+                    app:menu="@menu/bottom_app_bar" />
+
+            </FrameLayout>
+
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </RelativeLayout>

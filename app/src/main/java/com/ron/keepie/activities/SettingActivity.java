@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.ron.keepie.R;
 import com.ron.keepie.activities.adult.FollowActivity;
 import com.ron.keepie.activities.adult.NotificationsActivity;
+import com.ron.keepie.activities.adult.ShieldActivity;
 import com.ron.keepie.activities.child.SearchConnectionsActivity;
 import com.ron.keepie.callbacks.Callback_upload_img;
 import com.ron.keepie.callbacks.Callback_user_status;
@@ -134,8 +135,8 @@ public class SettingActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.action_notify) {
                 go_next(NotificationsActivity.class);
             } else if (item.getItemId() == R.id.action_test) {
-                // go_next(Activity_private_account_profile.class); 
-                // TODO: 27/05/2023  
+                 go_next(ShieldActivity.class);
+
             }
             return false;
         });

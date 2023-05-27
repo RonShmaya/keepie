@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ron.keepie.R;
+import com.ron.keepie.activities.MyFirebaseMessagingService;
 import com.ron.keepie.activities.SettingActivity;
 import com.ron.keepie.activities.child.SearchConnectionsActivity;
 import com.ron.keepie.adapters.ConnectiosAdapterAdult;
@@ -74,8 +75,8 @@ public class FollowActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.action_notify) {
                 go_next(NotificationsActivity.class);
             } else if (item.getItemId() == R.id.action_test) {
-                // go_next(Activity_private_account_profile.class);
-                // TODO: 26/05/2023 add to all actions test
+                go_next(ShieldActivity.class);
+
             }
             return false;
         });
@@ -125,7 +126,7 @@ public class FollowActivity extends AppCompatActivity {
         @Override
         public void track_updated() {
             followersAdapter.notifyDataSetChanged();
-
+            MyFirebaseMessagingService.add_topic(current_track.getPhone_child().substring(1));
         }
 
         @Override
@@ -135,6 +136,7 @@ public class FollowActivity extends AppCompatActivity {
         @Override
         public void track_deleted() {
             followersAdapter.notifyDataSetChanged();
+            MyFirebaseMessagingService.remove_topic(current_track.getPhone_child().substring(1));
             if(myFollows.isEmpty())
                 follow_LAY_empty.setVisibility(View.VISIBLE);
 
@@ -166,13 +168,13 @@ public class FollowActivity extends AppCompatActivity {
             action_user_clicked(contact, position, is_approved, track);
         }
     };
-
+    private Track current_track;
     private void action_user_clicked(KeepieUser contact, int position, boolean is_approved, Track track) {
         if(track == null){
             Log.d("MyLog","this is very bad");
             return;
         }
-
+        current_track= track;
         if (is_approved) {
             track.setApproved(true);
             TrackServerCommunicator.getInstance().updateTrack(track);

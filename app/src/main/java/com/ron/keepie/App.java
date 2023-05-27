@@ -4,6 +4,8 @@ import android.app.Application;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.ron.keepie.activities.MyFirebaseMessagingService;
+import com.ron.keepie.mytools.MySP;
 import com.ron.keepie.mytools.MyServices;
 import com.ron.keepie.mytools.Permissions;
 
@@ -13,6 +15,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         MyServices.initHelper(this);
+        MySP.initHelper(this);
         new Thread(
                 () -> {
                     if(Permissions.all_permissions_ok(this))
