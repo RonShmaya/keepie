@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.ron.keepie.R;
 import com.ron.keepie.activities.adult.FollowActivity;
 import com.ron.keepie.activities.adult.NotificationsActivity;
+import com.ron.keepie.activities.child.SearchConnectionsActivity;
 import com.ron.keepie.callbacks.Callback_upload_img;
 import com.ron.keepie.callbacks.Callback_user_status;
 import com.ron.keepie.dialogs.ImageDialog;
@@ -44,9 +45,7 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
 public class NewUserSettingActivity extends AppCompatActivity {
-    private CoordinatorLayout container;
     private MaterialButton profile_BTN_save;
-    private BottomNavigationView nav_view;
     private TextInputEditText profile_EDT_name;
     private CircleImageView profile_IMG_photo;
     private MaterialTextView profile_LBL_phone;
@@ -61,7 +60,7 @@ public class NewUserSettingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
+        setContentView(R.layout.activity_setting_new_user);
         UserServerCommunicator.getInstance().setSetUserCallback(setUserCallback);
         MyDB.getInstance().setCallback_user_status(callback_user_status);
         MyStorage.getInstance().setCallback_upload_profile_img(callback_upload_img);
@@ -71,7 +70,6 @@ public class NewUserSettingActivity extends AppCompatActivity {
     }
 
     private void init_page() {
-        nav_view.setVisibility(View.GONE);
         phone = FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
         if (phone == null) {
             Toast.makeText(this, "Authentication error...", Toast.LENGTH_SHORT).show();
@@ -84,9 +82,7 @@ public class NewUserSettingActivity extends AppCompatActivity {
 
 
     private void findViews() {
-        container = findViewById(R.id.container);
         fab_back = findViewById(R.id.fab_back);
-        nav_view = findViewById(R.id.nav_view);
         profile_BTN_save = findViewById(R.id.profile_BTN_save);
         profile_IMG_photo = findViewById(R.id.profile_IMG_photo);
         profile_LBL_phone = findViewById(R.id.profile_LBL_phone);
@@ -131,7 +127,7 @@ public class NewUserSettingActivity extends AppCompatActivity {
             Toast.makeText(NewUserSettingActivity.this, "Done!", Toast.LENGTH_SHORT).show();
 
             if (myUser.isIs_child()) {
-                // TODO: 13/05/2023  go next
+                go_next(SearchConnectionsActivity.class);
             } else {
                 go_next(FollowActivity.class);
             }

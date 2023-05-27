@@ -11,12 +11,21 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.ron.keepie.R;
 import com.ron.keepie.activities.adult.FollowActivity;
+import com.ron.keepie.activities.child.SearchConnectionsActivity;
 import com.ron.keepie.mytools.DataManager;
 import com.ron.keepie.objects.KeepieUser;
 import com.ron.keepie.server.UserServerCommunicator;
 import com.ron.keepie.server.server_callbacks.GetUserCallback;
 
-// TODO: 13/05/2023 handle in meanifest page orieziontal & not return to first page 
+
+
+// TODO: 18/05/2023 server as poetry run!
+// TODO: 18/05/2023 change logo
+// TODO: 13/05/2023 how to listen notifications of sychronized like broadca or kafka
+// TODO: 13/05/2023 start to manage chats -> python go alone to the firebase? chats messages -> app sends to the server, or server read chats alone
+// TODO: 13/05/2023 last page - make it WOW + on manifest
+// TODO: 18/05/2023 search page add notification to the adult?
+
 public class Enter_app_activity extends AppCompatActivity {
     private LottieAnimationView enter_app_lottie;
 
@@ -80,8 +89,7 @@ public class Enter_app_activity extends AppCompatActivity {
 
             DataManager.getDataManager().set_account(user);
             if(user.isIs_child()){
-                //go_next(NotificationsActivity.class);
-                // TODO: 13/05/2023 add child main page
+                go_next(SearchConnectionsActivity.class);
             }
             else{
                 go_next(FollowActivity.class);

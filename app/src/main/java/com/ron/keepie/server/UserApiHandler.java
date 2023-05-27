@@ -1,6 +1,9 @@
 package com.ron.keepie.server;
 
 import com.ron.keepie.objects.KeepieUser;
+import com.ron.keepie.objects.UsersPhones;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -13,6 +16,9 @@ public interface UserApiHandler {
 
     @GET("user/{id}")
     Call<KeepieUser> getUser(@Path("id") String userId );
+
+    @PUT("/user/list")
+    Call<List<KeepieUser>> getUsersList(@Body UsersPhones phonesList );
 
     @POST("/user")
     Call<Void> createUser(@Body KeepieUser newUser);

@@ -26,8 +26,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="#03BD9C">
+                android:layout_height="35dp"
+                android:background="#F9EAAA">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/post_LBL_Name"
@@ -36,20 +36,17 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="20dp"
                     android:text="yao cho"
-                    android:textColor="#ffffff"
-                    android:textSize="23sp"
+                    android:textColor="#0E0D0D"
+                    android:textSize="17sp"
                     android:textStyle="bold" />
-
-
-
 
             </RelativeLayout>
 
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/post_IMG"
-                android:layout_width="match_parent"
-                android:layout_height="350dp"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_user" />
 

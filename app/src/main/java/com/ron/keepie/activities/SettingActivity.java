@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.ron.keepie.R;
 import com.ron.keepie.activities.adult.FollowActivity;
 import com.ron.keepie.activities.adult.NotificationsActivity;
+import com.ron.keepie.activities.child.SearchConnectionsActivity;
 import com.ron.keepie.callbacks.Callback_upload_img;
 import com.ron.keepie.callbacks.Callback_user_status;
 import com.ron.keepie.dialogs.ImageDialog;
@@ -34,7 +35,6 @@ import com.ron.keepie.mytools.MyStorage;
 import com.ron.keepie.objects.KeepieUser;
 import com.ron.keepie.server.UserServerCommunicator;
 import com.ron.keepie.server.server_callbacks.SetUserCallback;
-import com.ron.keepie.whatsup_objects.UserChat;
 import com.ron.keepie.whatsup_objects.UserStatus;
 
 import org.jetbrains.annotations.NotNull;
@@ -44,20 +44,20 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-// TODO: 13/05/2023 in DB raise user already exists 
-// TODO: 13/05/2023 change image dialog colors
+
 public class SettingActivity extends AppCompatActivity {
-    private CoordinatorLayout container;
+    private CoordinatorLayout container_adult;
+    private CoordinatorLayout container_child;
     private MaterialButton profile_BTN_save;
     private BottomNavigationView nav_view;
     private TextInputEditText profile_EDT_name;
+    private FloatingActionButton fab_logout;
+    private FloatingActionButton fab_home;
     private CircleImageView profile_IMG_photo;
     private MaterialTextView profile_LBL_phone;
     private LottieAnimationView profile_Lottie_photo;
-    private FloatingActionButton fab_back;
 
-    private String phone;
-    private String setting_type;
+
     private KeepieUser myUser = null;
 
 
@@ -88,32 +88,44 @@ public class SettingActivity extends AppCompatActivity {
 
         profile_EDT_name.setText(myUser.getName());
         profile_LBL_phone.setText(myUser.getPhone());
-        fab_back.setVisibility(View.GONE);
         if (myUser.isIs_child()) {
-            nav_view.setVisibility(View.GONE);
-            // TODO: 13/05/2023 add child steps
+            init_toolbar_child();
         } else {
-            init_toolbar();
+            init_toolbar_adult();
         }
     }
 
+
+
     private void findViews() {
-        container = findViewById(R.id.container);
-        fab_back = findViewById(R.id.fab_back);
+        container_adult = findViewById(R.id.container_adult);
+        container_child = findViewById(R.id.container_child);
         nav_view = findViewById(R.id.nav_view);
+        fab_logout = findViewById(R.id.fab_logout);
+        fab_home = findViewById(R.id.fab_home);
         profile_BTN_save = findViewById(R.id.profile_BTN_save);
         profile_IMG_photo = findViewById(R.id.profile_IMG_photo);
         profile_LBL_phone = findViewById(R.id.profile_LBL_phone);
         profile_EDT_name = findViewById(R.id.profile_EDT_name);
         profile_Lottie_photo = findViewById(R.id.profile_Lottie_photo);
 
+        fab_logout.setOnClickListener( v -> {
+            FirebaseAuth.getInstance().signOut();
+            DataManager.getDataManager().clean();
+            go_next(Enter_app_activity.class);
+        });
+
         profile_IMG_photo.setOnClickListener(view -> new ImageDialog().show(this, myUser.getPhone(), myUser.getImage()));
         profile_Lottie_photo.setOnClickListener(view -> add_photo());
-        fab_back.setOnClickListener(view -> go_next(Register_activity.class));
         profile_BTN_save.setOnClickListener(onClickListenerSave);
     }
+    private void init_toolbar_child() {
+        container_child.setVisibility(View.VISIBLE);
+        fab_home.setOnClickListener(v -> go_next(SearchConnectionsActivity.class));
 
-    private void init_toolbar() {
+    }
+    private void init_toolbar_adult() {
+        container_adult.setVisibility(View.VISIBLE);
         nav_view.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.action_followers) {
                 go_next(FollowActivity.class);
@@ -122,7 +134,8 @@ public class SettingActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.action_notify) {
                 go_next(NotificationsActivity.class);
             } else if (item.getItemId() == R.id.action_test) {
-                // go_next(Activity_private_account_profile.class);
+                // go_next(Activity_private_account_profile.class); 
+                // TODO: 27/05/2023  
             }
             return false;
         });

@@ -28,4 +28,8 @@ public class DataManager {
     public KeepieUser getMy_current_user() {
         return my_current_user;
     }
+
+    public void clean() {
+        my_current_user = null;
+    }
 }

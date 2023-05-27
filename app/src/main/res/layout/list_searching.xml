@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView 
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,8 +8,7 @@
     android:clickable="true"
     android:elevation="0dp"
     app:cardCornerRadius="10dp"
-    app:cardElevation="0dp"
-    android:backgroundTint="#f9e17f">
+    app:cardElevation="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +17,7 @@
         android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/listFollowers_IMG_photo"
+            android:id="@+id/listSearching_IMG_photo"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
@@ -27,15 +25,15 @@
             android:src="@drawable/ic_user" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="10dp"
             android:layout_weight="8"
             android:orientation="vertical">
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/listFollowers_LBL_user_name"
+                android:id="@+id/listSearching_LBL_user_name"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical|start"
@@ -48,39 +46,18 @@
                 android:textSize="15dp" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/listFollowers_LBL_phone"
+                android:id="@+id/listSearching_LBL_phone"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="start|bottom"
+                android:layout_height="35dp"
+                android:layout_gravity="start"
                 android:fontFamily="@font/helvetica"
                 android:text="05444444444"
                 android:textAlignment="viewStart"
                 android:textColor="#5B5252"
                 android:textSize="13dp" />
 
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/rounded"
-            android:backgroundTint="#D81B60"
-            android:orientation="horizontal"
-            android:layout_marginEnd="5dp"
-            android:gravity="center"
-            android:padding="10dp">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/listFollowers_IMG_delete"
-                android:layout_width="17dp"
-                android:layout_height="17dp"
-                android:layout_gravity="center_vertical"
-                android:clickable="true"
-                android:backgroundTint="#ffffff"
-                android:background="@android:drawable/ic_delete" />
         </LinearLayout>
 
     </LinearLayout>
+
 </com.google.android.material.card.MaterialCardView>

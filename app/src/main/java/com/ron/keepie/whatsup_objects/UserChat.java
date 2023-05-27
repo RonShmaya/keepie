@@ -3,7 +3,6 @@ package com.ron.keepie.whatsup_objects;
 import androidx.annotation.Nullable;
 
 public class UserChat {
-    // TODO: 09/02/2023 photo
     private String phone = "";
     private String name = "";
     private String img = "";

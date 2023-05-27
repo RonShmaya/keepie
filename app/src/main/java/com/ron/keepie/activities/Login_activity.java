@@ -14,6 +14,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.ron.keepie.R;
 import com.ron.keepie.activities.adult.FollowActivity;
+import com.ron.keepie.activities.child.SearchConnectionsActivity;
 import com.ron.keepie.mytools.DataManager;
 import com.ron.keepie.objects.KeepieUser;
 import com.ron.keepie.server.UserServerCommunicator;
@@ -91,8 +92,7 @@ public class Login_activity extends AppCompatActivity {
 
             DataManager.getDataManager().set_account(user);
             if(user.isIs_child()){
-                //go_next(NotificationsActivity.class);
-                // TODO: 13/05/2023 add child main page
+                go_next(SearchConnectionsActivity.class);
             }
             else{
                 go_next(FollowActivity.class);
@@ -102,13 +102,13 @@ public class Login_activity extends AppCompatActivity {
 
         @Override
         public void not_found_user() {
-            Toast.makeText(Login_activity.this, "User didn't founded", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Login_activity.this, "User didn't founded...", Toast.LENGTH_SHORT).show();
 
         }
 
         @Override
         public void failed(int status_code, String info) {
-            Toast.makeText(Login_activity.this, "Some Error occurred during searching account "+status_code + " "+ info, Toast.LENGTH_SHORT).show();
+            Toast.makeText(Login_activity.this, "Some Error occurred during searching account "+status_code + " "+ info, Toast.LENGTH_LONG).show();
         }
     };
 }

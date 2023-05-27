@@ -8,69 +8,76 @@
     tools:context=".activities.Login_activity">
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#f9e17f"
-            android:gravity="center"
-            android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f9e17f"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/rounded"
+            android:backgroundTint="@color/white">
 
             <com.airbnb.lottie.LottieAnimationView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/enter_app_lottie"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="false"
                 app:lottie_rawRes="@raw/lottie_lock"
                 app:lottie_speed="0.8" />
+        </FrameLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/connect_BTN_login"
-                    android:layout_width="270dp"
-                    android:layout_height="70dp"
-                    android:fontFamily="@font/helvetica"
-                    android:layout_marginBottom="20dp"
-                    android:backgroundTint="#6B6060"
-                    android:text="login"
-                    android:textStyle="bold"
-                    android:textColor="#F9EAAA"
-                    android:textSize="15sp"
-                    app:cornerRadius="20dp" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/connect_BTN_login"
+                android:layout_width="270dp"
+                android:layout_height="70dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="#6B6060"
+                android:fontFamily="@font/comfortaa_bold"
+                android:text="login"
+                android:textColor="#F9EAAA"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:cornerRadius="20dp" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/connect_BTN_register"
-                    android:layout_width="270dp"
-                    android:layout_height="70dp"
-                    android:layout_marginBottom="20dp"
-                    android:textStyle="bold"
-                    android:backgroundTint="#F9EAAA"
-                    android:fontFamily="@font/helvetica"
-                    android:text="Register"
-                    android:textColor="#6B6060"
-                    android:textSize="15sp"
-                    app:cornerRadius="20dp"
-                    app:strokeColor="#6B6060"
-                    app:strokeWidth="5dp" />
-
-
-            </LinearLayout>
-
-
-            <!--        3A3636-->
-            <!--        F9EAAA-->
-            <!--        #6B6060-->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/connect_BTN_register"
+                android:layout_width="270dp"
+                android:layout_height="70dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="#F9EAAA"
+                android:fontFamily="@font/comfortaa_bold"
+                android:text="Register"
+                android:textColor="#6B6060"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:cornerRadius="20dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="0dp" />
 
 
         </LinearLayout>
 
 
+        <!--        3A3636-->
+        <!--        F9EAAA-->
+        <!--        #6B6060-->
 
 
+    </LinearLayout>
 
 
 </RelativeLayout>

@@ -1,5 +1,7 @@
 package com.ron.keepie.objects;
 
+import java.util.Objects;
+
 public class KeepieUser {
 
 
@@ -11,6 +13,10 @@ public class KeepieUser {
 
 
     public KeepieUser() {
+    }
+
+    public KeepieUser(String phone) {
+        this.phone = phone;
     }
 
     public KeepieUser(boolean is_child, String name, String phone, String image) {
@@ -54,5 +60,28 @@ public class KeepieUser {
     public KeepieUser setImage(String image) {
         this.image = image;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "KeepieUser{" +
+                "is_child=" + is_child +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", image='" + image + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        KeepieUser that = (KeepieUser) o;
+        return phone.equals(that.phone);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(phone);
     }
 }
