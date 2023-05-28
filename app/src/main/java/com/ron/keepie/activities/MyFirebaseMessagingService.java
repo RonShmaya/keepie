@@ -1,6 +1,9 @@
 package com.ron.keepie.activities;
 
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
@@ -38,7 +41,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     private void processNotification(String title, String body) {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "channel_id")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Create the notification channel
+            NotificationChannel channel = new NotificationChannel("CHANNEL_ID", title, NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(channel);
+        }
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "CHANNEL_ID")
                 .setSmallIcon(R.drawable.ic_new_logo)
                 .setContentTitle(title)
                 .setContentText(body)
@@ -46,9 +55,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setAutoCancel(true);
 
 
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.notify(0, builder.build());    }
-
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.notify(5, builder.build());
+    }
 
     @Override
     public void onNewToken(String token) {
