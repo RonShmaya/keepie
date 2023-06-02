@@ -34,7 +34,6 @@ public class Enter_app_activity extends AppCompatActivity {
         UserServerCommunicator.getInstance().setGetUserCallback(userCallback);
         findViews();
         decide_page_to_open();
-        enter_app_lottie.setOnClickListener(view -> new AdminDialog().show(this));
 
     }
 
