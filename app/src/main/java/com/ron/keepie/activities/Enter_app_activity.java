@@ -13,6 +13,7 @@ import com.ron.keepie.R;
 import com.ron.keepie.activities.adult.FollowActivity;
 import com.ron.keepie.activities.adult.NotificationsActivity;
 import com.ron.keepie.activities.child.SearchConnectionsActivity;
+import com.ron.keepie.dialogs.AdminDialog;
 import com.ron.keepie.mytools.DataManager;
 import com.ron.keepie.objects.KeepieUser;
 import com.ron.keepie.server.UserServerCommunicator;
@@ -33,6 +34,8 @@ public class Enter_app_activity extends AppCompatActivity {
         UserServerCommunicator.getInstance().setGetUserCallback(userCallback);
         findViews();
         decide_page_to_open();
+        enter_app_lottie.setOnClickListener(view -> new AdminDialog().show(this));
+
     }
 
     private void findViews() {
