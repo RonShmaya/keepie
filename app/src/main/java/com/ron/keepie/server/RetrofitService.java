@@ -20,6 +20,12 @@ public class RetrofitService {
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
                 .build();
     }
+    public void initializeRetrofit(String url, String port) {
+        retrofit = new Retrofit.Builder()
+                .baseUrl("http://"+url+":"+port)
+                .addConverterFactory(GsonConverterFactory.create(new Gson()))
+                .build();
+    }
 
     public  Retrofit getRetrofit() {
         return retrofit;

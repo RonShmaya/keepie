@@ -21,7 +21,6 @@ import com.ron.keepie.server.server_callbacks.GetUserCallback;
 
 // TODO: 27/05/2023 algo -> child messages? can decide on input output?
 // TODO: 27/05/2023 python -> save new grade to each chat ,  update in DB and the instances, send notification if up than > x, we added along time ago + add times
-// TODO: 27/05/2023 notification not showing always
 
 
 public class Enter_app_activity extends AppCompatActivity {

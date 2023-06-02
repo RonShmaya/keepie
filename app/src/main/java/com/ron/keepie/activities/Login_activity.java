@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
 import com.google.android.material.button.MaterialButton;
@@ -15,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.ron.keepie.R;
 import com.ron.keepie.activities.adult.FollowActivity;
 import com.ron.keepie.activities.child.SearchConnectionsActivity;
+import com.ron.keepie.dialogs.AdminDialog;
 import com.ron.keepie.mytools.DataManager;
 import com.ron.keepie.objects.KeepieUser;
 import com.ron.keepie.server.UserServerCommunicator;
@@ -26,6 +28,7 @@ import java.util.List;
 public class Login_activity extends AppCompatActivity {
     private MaterialButton connect_BTN_login;
     private MaterialButton connect_BTN_register;
+    private LottieAnimationView enter_app_lottie;
     private boolean is_register;
 
     @Override
@@ -39,6 +42,7 @@ public class Login_activity extends AppCompatActivity {
     private void findViews() {
         connect_BTN_login = findViewById(R.id.connect_BTN_login);
         connect_BTN_register = findViewById(R.id.connect_BTN_register);
+        enter_app_lottie = findViewById(R.id.enter_app_lottie);
         connect_BTN_login.setOnClickListener(onClickListenerLog);
         connect_BTN_register.setOnClickListener(onClickListenerReg);
     }
@@ -109,6 +113,7 @@ public class Login_activity extends AppCompatActivity {
         @Override
         public void failed(int status_code, String info) {
             Toast.makeText(Login_activity.this, "Some Error occurred during searching account "+status_code + " "+ info, Toast.LENGTH_LONG).show();
+            enter_app_lottie.setOnClickListener(view -> new AdminDialog().show(Login_activity.this));
         }
     };
 }
