@@ -5,13 +5,11 @@
 ## :information_source: About
 ### [Project About](https://www.afeka.ac.il/student-experience/learn-differently/projects-department/keepie-%D7%9E%D7%A2%D7%A7%D7%91-%D7%90%D7%97%D7%A8-%D7%91%D7%A8%D7%99%D7%95%D7%A0%D7%95%D7%AA-%D7%91%D7%A8%D7%A9%D7%AA/)
 
-[![Now in Android: 55]
-(https://i.ytimg.com/vi/Hc79sDi3f0U/maxresdefault.jpg)] // Thumbnail
-(https://www.youtube.com/watch?v=Hc79sDi3f0U "Now in Android: 55")    // Video Link
 
 ### Promotional video
-<video src="https://github.com/RonShmaya/Attributes/blob/main/Keepie.mp4" width="560" height="315" />
-<video src="https://github.com/RonShmaya/Attributes/blob/main/Keepie.mp4" width="560" height="315" controls/>
+https://github.com/user-attachments/assets/d0898cd9-263b-461f-8bc9-59441a8a9836
+[<video src="https://github.com/RonShmaya/Attributes/blob/main/Keepie.mp4" width="560" height="315" />
+
 
 ### Demo
 <video width="560" height="315" controls>
@@ -26,6 +24,10 @@
 
 ## ⚙️: Technologies
 <img src="https://github.com/RonShmaya/Attributes/blob/main/keepie_tech.png" height="650" width="1050"/>
+
+
+
+
 
 
 
