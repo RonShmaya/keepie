@@ -19,9 +19,9 @@
 
 
 ## :Serv: Technologies
-<img src="https://github.com/RonShmaya/Attributes/blob/main/keepie_tech.jpg" height="650" width="800"/>|
+<img src="https://github.com/RonShmaya/Attributes/keepie_tech.jpg" height="650" width="800"/>|
 
 ## :Serv: HLD
-<img src="https://github.com/RonShmaya/Attributes/blob/main/keepie_hld.jpg" height="650" width="800"/>|
+<img src="https://github.com/RonShmaya/Attributes/keepie_hld.jpg" height="650" width="800"/>|
 
 
