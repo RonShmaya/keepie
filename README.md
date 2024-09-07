@@ -7,8 +7,11 @@
 
 
 ### Promotional video
-https://github.com/user-attachments/assets/d0898cd9-263b-461f-8bc9-59441a8a9836
-[<video src="https://github.com/RonShmaya/Attributes/blob/main/Keepie.mp4" width="560" height="315" />
+
+
+https://github.com/user-attachments/assets/dd72920c-5b05-4553-b84e-f54dcc41f690
+
+
 
 
 ### Demo
