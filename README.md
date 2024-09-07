@@ -18,7 +18,7 @@ https://github.com/user-attachments/assets/dd72920c-5b05-4553-b84e-f54dcc41f690
 <br/>
 
 ## ⚙️: Technologies
-<img src="https://github.com/RonShmaya/Attributes/blob/main/keepie_platforms.png" height="650" width="650"/>
+<img src="https://github.com/RonShmaya/Attributes/blob/main/keepie_platforms.png" height="400" width="650"/>
 
 
 
