@@ -7,18 +7,10 @@
 
 
 ### Promotional video
-
-
 https://github.com/user-attachments/assets/dd72920c-5b05-4553-b84e-f54dcc41f690
 
 
-
-
 ### Demo
-<video width="560" height="315" controls>
-  <source src="https://www.afeka.ac.il/media/bagfyz2l/%D7%A1%D7%A8%D7%98%D7%95%D7%9F-%D7%AA%D7%93%D7%9E%D7%99%D7%AA-keepie-%D7%A7%D7%99%D7%A4%D7%99.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
 
 
 ## 🍹: HLD
