@@ -1,5 +1,5 @@
 
-<h3 align="center">Final Project Service</h3>
+<h3 align="center">Final Project Service - Android App</h3>
 <h1 align="center">Welcome To Keepie</h1>
 
 
