@@ -7,7 +7,7 @@
 
 
 ### Promotional video
-https://github.com/user-attachments/assets/dd72920c-5b05-4553-b84e-f54dcc41f690
+ [Full Project Demo](https://github.com/user-attachments/assets/dd72920c-5b05-4553-b84e-f54dcc41f690)
 
 
 ### Demo
