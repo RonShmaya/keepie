@@ -7,11 +7,11 @@
 
 
 ### Promotional video
- [Full Project Demo](https://github.com/user-attachments/assets/dd72920c-5b05-4553-b84e-f54dcc41f690)
+https://github.com/user-attachments/assets/dd72920c-5b05-4553-b84e-f54dcc41f690
 
 
 ### Demo
-https://drive.google.com/file/d/1GhiubJH78AJceiY1FHCqR8xBodiLvFQ_/view?usp=sharing
+ [Full Project Demo](https://drive.google.com/file/d/1GhiubJH78AJceiY1FHCqR8xBodiLvFQ_/view?usp=sharing)
 
 ## 🍹: HLD
 <img src="https://github.com/RonShmaya/Attributes/blob/main/keepie_hld.png" height="650" width="1050"/>
